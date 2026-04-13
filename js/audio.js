@@ -7,30 +7,31 @@ const AudioManager = (() => {
   let bgMusic = null;
   let audioUnlocked = false;
 
+  // ✅ Set detik berapa musik mulai (ubah angka ini)
+  const MUSIC_START_TIME = 0; // detik ke-0, ganti misal 10 buat skip ke detik 10
+
   function init() {
-    sfx.kertas = document.getElementById('sfxKertas');
-    sfx.angin = document.getElementById('sfxAngin');
-    sfx.tiupan = document.getElementById('sfxTiupan');
-    bgMusic = document.getElementById('bgMusic');
+    sfx.kertas  = document.getElementById('sfxKertas');
+    sfx.angin   = document.getElementById('sfxAngin');
+    sfx.tiupan  = document.getElementById('sfxTiupan');
+    bgMusic     = document.getElementById('bgMusic');
 
     if (bgMusic) {
       bgMusic.volume = 0.3;
     }
 
-    // Unlock audio on first user interaction
     const unlockAudio = () => {
       if (audioUnlocked) return;
       audioUnlocked = true;
 
-      // Play and immediately pause all audio to unlock on iOS
       Object.values(sfx).forEach(s => {
         if (s) {
           s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {});
         }
       });
 
-      // Start background music
       if (bgMusic) {
+        bgMusic.currentTime = MUSIC_START_TIME; // ✅ skip ke detik tertentu
         bgMusic.play().catch(() => {});
       }
 

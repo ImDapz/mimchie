@@ -186,15 +186,13 @@
   z-index: 2;
   width: 80%;
   max-width: 360px;
-  /* Starts far away, comes toward camera */
-  transform: translateZ(-300px) scale(0.5);
-  transition: transform 0.7s var(--ease-depth), opacity 0.5s var(--ease-smooth);
-  opacity: 0;
+  transform-origin: center center;
+  transform: scale(0.15); /* mulai kecil seperti ukuran pigura di scene */
+  opacity: 1;             /* tidak pakai opacity, biar terasa solid */
 }
 
 .pigura-overlay.active .pigura-focus {
-  transform: translateZ(0px) scale(1);
-  opacity: 1;
+  /* hapus ini, biarkan animasi CSS yang handle */
 }
 
 .pigura-focus-frame {

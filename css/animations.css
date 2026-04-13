@@ -38,3 +38,26 @@
   pointer-events: none;
   animation: smoke-rise 1.2s ease-out forwards;
 }
+
+/* =============================================
+   PIGURA — Scene zoom + blur effect
+   ============================================= */
+@keyframes scene-zoom-in {
+  0%   { transform: scale(1);    filter: blur(0px); }
+  40%  { transform: scale(1.8);  filter: blur(6px); }
+  100% { transform: scale(3.5);  filter: blur(0px); }
+}
+
+@keyframes scene-zoom-out {
+  0%   { transform: scale(3.5);  filter: blur(0px); }
+  40%  { transform: scale(1.8);  filter: blur(6px); }
+  100% { transform: scale(1);    filter: blur(0px); }
+}
+
+.scene.zoom-in {
+  animation: scene-zoom-in 0.55s var(--ease-depth) forwards;
+}
+
+.scene.zoom-out {
+  animation: scene-zoom-out 0.45s var(--ease-smooth) forwards;
+}

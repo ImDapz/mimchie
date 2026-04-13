@@ -50,3 +50,10 @@
 .cake-wrapper {
   transition: transform 0.3s var(--ease-smooth);
 }
+
+/* =============================================
+   SCENE ZOOM STATE
+   ============================================= */
+.scene.zooming {
+  will-change: transform, filter;
+}
