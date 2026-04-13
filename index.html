@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Selamat Ulang Tahun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/elements.css">
+  <link rel="stylesheet" href="css/candle.css">
+  <link rel="stylesheet" href="css/interactions.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- FADE IN BLACK OVERLAY -->
+  <div id="fade-overlay" class="fade-overlay"></div>
+
+  <!-- GLOBAL WARM GLOW FROM CANDLES -->
+  <div id="warm-glow-layer" class="warm-glow-layer"></div>
+
+  <!-- SCENE -->
+  <div class="scene" id="scene">
+
+    <!-- WALLPAPER BACKGROUND -->
+    <div class="scene-bg">
+      <img src="/background.png" alt="" class="scene-bg-img">
+    </div>
+
+    <!-- === BACKGROUND WALL AREA (pigura zone) === -->
+    <div class="wall-area">
+
+      <!-- Pigura 2 — top left, smaller 3:4 -->
+      <div class="pigura pigura-2" data-pigura="2" id="pigura2">
+        <div class="pigura-frame">
+          <div class="pigura-inner-shadow"></div>
+          <img src="/pigura2.png" alt="Pigura 2" class="pigura-img">
+        </div>
+      </div>
+
+      <!-- Pigura 1 — top right, larger 3:4 -->
+      <div class="pigura pigura-1" data-pigura="1" id="pigura1">
+        <div class="pigura-frame">
+          <div class="pigura-inner-shadow"></div>
+          <img src="/pigura1.png" alt="Pigura 1" class="pigura-img">
+        </div>
+      </div>
+
+      <!-- Pigura 3 — middle left, 4:3 -->
+      <div class="pigura pigura-3" data-pigura="3" id="pigura3">
+        <div class="pigura-frame">
+          <div class="pigura-inner-shadow"></div>
+          <img src="/pigura3.png" alt="Pigura 3" class="pigura-img">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- === TABLE AREA (foreground) === -->
+    <div class="table-area">
+
+      <!-- Decorative candle — left side, always on -->
+      <div class="deco-candle" id="decoCandle">
+        <div class="deco-candle-body">
+          <img src="/lilinDekorasi.png" alt="Lilin Dekorasi" class="deco-candle-img">
+          <div class="deco-flame-wrap">
+            <div class="deco-flame"></div>
+            <div class="deco-flame-core"></div>
+          </div>
+          <div class="deco-candle-glow"></div>
+        </div>
+      </div>
+
+      <!-- Vas kecil + bunga — left of cake -->
+      <div class="vas-kecil" id="vasKecil">
+        <img src="/vasKecil.png" alt="Vas Kecil" class="vas-kecil-img">
+      </div>
+
+      <!-- Vas menengah + bunga — right-center above cake -->
+      <div class="vas-menengah" id="vasMenengah">
+        <img src="/vasMenengah.png" alt="Vas Menengah" class="vas-menengah-img">
+      </div>
+
+      <!-- Kue + Lilin (main interactive) -->
+      <div class="cake-area" id="cakeArea">
+        <div class="cake-wrapper">
+          <img src="/kue.png" alt="Kue Ulang Tahun" class="cake-img">
+          <!-- Main candle on cake -->
+          <div class="main-candle" id="mainCandle">
+            <div class="main-flame-wrap" id="mainFlameWrap">
+              <div class="main-flame"></div>
+              <div class="main-flame-core"></div>
+            </div>
+            <div class="main-candle-glow" id="mainCandleGlow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Surat — leaning right, near vas bunga besar -->
+      <div class="surat" id="surat">
+        <img src="/surat.png" alt="Surat" class="surat-img">
+      </div>
+
+      <!-- Vas bunga besar — right side -->
+      <div class="vas-besar" id="vasBesar">
+        <img src="/vasBesar.png" alt="Vas Bunga Besar" class="vas-besar-img">
+      </div>
+
+      <!-- Table element -->
+      <div class="table-element" id="tableElement">
+        <img src="/meja.png" alt="Meja" class="table-img">
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SURAT FOCUS OVERLAY — isi surat (bukan amplop) -->
+  <div class="surat-overlay" id="suratOverlay">
+    <div class="surat-overlay-bg"></div>
+    <div class="surat-focus" id="suratFocus">
+      <img src="/isiSurat.png" alt="Isi Surat" class="surat-focus-img">
+    </div>
+  </div>
+
+  <!-- PIGURA FOCUS OVERLAY (no blur) -->
+  <div class="pigura-overlay" id="piguraOverlay">
+    <div class="pigura-focus" id="piguraFocus">
+      <div class="pigura-focus-frame">
+        <div class="pigura-focus-inner-shadow"></div>
+        <img src="" alt="Pigura Focus" class="pigura-focus-img" id="piguraFocusImg">
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="sfxKertas" src="/music/membalikkoran.mp3" preload="auto"></audio>
+  <audio id="sfxAngin" src="/music/TransisiAngin.mp3" preload="auto"></audio>
+  <audio id="sfxTiupan" src="/music/tiupan.mp3" preload="auto"></audio>
+  <audio id="bgMusic" src="/music/lagubackground.mp3" preload="auto" loop></audio>
+
+  <script src="js/fallback.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/fade.js"></script>
+  <script src="js/candle.js"></script>
+  <script src="js/surat.js"></script>
+  <script src="js/pigura.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
