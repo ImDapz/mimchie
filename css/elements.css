@@ -162,7 +162,7 @@
 
 /* =============================================
    PIGURA OVERLAY (focus — NO blur)
-   ============================================= */
+   ============================================= 
 .pigura-overlay {
   position: fixed;
   inset: 0;
@@ -172,7 +172,7 @@
   justify-content: center;
   pointer-events: none;
   opacity: 0;
-  /* perspective for camera-move-forward effect */
+  /* perspective for camera-move-forward effect 
   perspective: 800px;
 }
 
@@ -186,9 +186,6 @@
   z-index: 2;
   width: 80%;
   max-width: 360px;
-  transform-origin: center center;
-  transform: scale(0.15); /* mulai kecil seperti ukuran pigura di scene */
-  opacity: 1;             /* tidak pakai opacity, biar terasa solid */
 }
 
 .pigura-overlay.active .pigura-focus {

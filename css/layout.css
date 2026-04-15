@@ -14,6 +14,10 @@
   background: var(--bg-dark);
 }
 
+.scene.zooming {
+  overflow: visible;
+}
+
 /* =============================================
    SCENE BACKGROUND — wallpaper image
    Sits behind everything, feels far back
