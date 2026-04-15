@@ -108,9 +108,9 @@
 /* Pigura 3 — middle left, 4:3 ratio */
 .pigura-3 {
   position: absolute;
-  top: 32%;
-  left: 5%;
-  width: 45%;
+  top: 29%;
+  left: 3%;
+  width: 39%;
   z-index: 3;
 }
 

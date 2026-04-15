@@ -2,7 +2,7 @@ const AudioManager = (() => {
   const sfx = {};
   let bgMusic = null;
   let audioUnlocked = false;
-  const MUSIC_START_TIME = 60+60+49;
+  const MUSIC_START_TIME = 60+60+60+5;
 
   const VOLUME_KEYFRAMES = [
     { time: 0,   volume: 0.3 },
@@ -21,20 +21,31 @@ const AudioManager = (() => {
     return VOLUME_KEYFRAMES[VOLUME_KEYFRAMES.length - 1].volume;
   }
 
-  function init() {
-    sfx.kertas = document.getElementById('sfxKertas');
-    sfx.angin  = document.getElementById('sfxAngin');
-    sfx.tiupan = document.getElementById('sfxTiupan');
-    bgMusic    = document.getElementById('bgMusic');
+	function init() {
+	  sfx.kertas = document.getElementById('sfxKertas');
+	  sfx.angin  = document.getElementById('sfxAngin');
+	  sfx.tiupan = document.getElementById('sfxTiupan');
+	  bgMusic    = document.getElementById('bgMusic');
 
-    if (bgMusic) {
-      bgMusic.volume = 0.3;
-      bgMusic.addEventListener('timeupdate', () => {
-        bgMusic.volume = getVolumeAt(bgMusic.currentTime);
-      });
-    }
-  }
+	  if (bgMusic) {
+	    bgMusic.volume = 0.3;
+	    bgMusic.addEventListener('timeupdate', () => {
+	      bgMusic.volume = getVolumeAt(bgMusic.currentTime);
+	    });
+	  }
 
+	  // Fallback: jika musik belum jalan setelah intro selesai,
+	  // unlock saat user tap di mana saja
+	  const fallbackUnlock = () => {
+	    if (!audioUnlocked) {
+	      startWithOffset(0);
+	    }
+	    document.removeEventListener('click', fallbackUnlock);
+	    document.removeEventListener('touchend', fallbackUnlock);
+	  };
+	  document.addEventListener('click', fallbackUnlock);
+	  document.addEventListener('touchend', fallbackUnlock);
+	}
   function play(name) {
     const sound = sfx[name];
     if (!sound) return;

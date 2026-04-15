@@ -1,0 +1,5 @@
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen">
+    <div id="intro-text"></div>
+    <div id="intro-tap-hint">tap anywhere</div>
+  </div>

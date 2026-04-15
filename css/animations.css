@@ -43,22 +43,29 @@
    PIGURA — Scene zoom + blur effect
    ============================================= */
 @keyframes scene-zoom-in {
-  0%   { transform: scale(1);   filter: blur(0px); }
-  40%  { transform: scale(1.5);   filter: blur(4px); }
-  100% { transform: scale(3);   filter: blur(0px); }
+  0%   { transform: scale(1);   filter: blur(4px); }
+  /*50%  { transform: scale(1.5);   filter: blur(4px); }*/
+  100% { transform: scale(2);   filter: blur(0px); }
 }
 
 @keyframes scene-zoom-out {
-  0%   { transform: scale(3);   filter: blur(0px); }
-  40%  { transform: scale(1.5);   filter: blur(4px); }
+  0%   { transform: scale(2);   filter: blur(4px); }
+  /*50%  { transform: scale(1.5);   filter: blur(4px); }*/
   100% { transform: scale(1);   filter: blur(0px); }
 }
 
 
 .scene.zoom-in {
-  animation: scene-zoom-in 0.55s var(--ease-depth) forwards;
+  animation: scene-zoom-in 1s var(--ease-depth) forwards;
 }
 
 .scene.zoom-out {
-  animation: scene-zoom-out 0.45s var(--ease-smooth) forwards;
+  animation: scene-zoom-out 0.6s var(--ease-smooth) forwards;
+}
+
+
+/* Initial state scene saat intro aktif */
+.scene.intro-zoom {
+  transform: scale(2);
+  transform-origin: 50% 50%;
 }

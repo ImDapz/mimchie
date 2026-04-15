@@ -12,10 +12,10 @@ const IntroManager = (() => {
   ];
 
   // ⏱️ DURASI (detik)
-  const WORDS_DURATION = 5;         // durasi tiap kata
-  const fade_in  = WORDS_DURATION / 4;   // 1.25s
-  const fade_out = WORDS_DURATION / 4;   // 1.25s
-  const totalDuration = words.length * WORDS_DURATION * 1000; // ms
+  const WORDS_DURATION = 5;
+  const fade_in  = WORDS_DURATION / 4;
+  const fade_out = WORDS_DURATION / 4;
+  const totalDuration = words.length * WORDS_DURATION * 1000;
 
   let started = false;
 
@@ -23,18 +23,19 @@ const IntroManager = (() => {
     const screen = document.getElementById('intro-screen');
     if (!screen) return;
 
+    // Set scene ke zoom awal
+    const scene = document.getElementById('scene');
+    if (scene) scene.classList.add('intro-zoom');
+
     const startHandler = () => {
       if (started) return;
       started = true;
 
-      // Sembunyikan hint
       const hint = document.getElementById('intro-tap-hint');
       if (hint) hint.style.display = 'none';
 
-      // Mulai sequence kata
       runSequence();
 
-      // Mulai musik dengan offset waktu intro
       if (typeof AudioManager !== 'undefined') {
         AudioManager.startWithOffset(totalDuration / 1000);
       }
@@ -58,24 +59,35 @@ const IntroManager = (() => {
 
     function showNext() {
       if (index >= words.length) {
-        // Semua kata selesai → tutup intro
+        const scene = document.getElementById('scene');
         const screen = document.getElementById('intro-screen');
-        if (screen) screen.classList.add('hidden');
+
+        if (scene) {
+          scene.style.transformOrigin = '50% 50%';
+          scene.classList.add('zooming', 'zoom-out');
+        }
+
+        if (screen) {
+          screen.style.transition = 'opacity 0.3s ease-in';
+          screen.style.opacity = '0';
+        }
+
+        setTimeout(() => {
+          if (screen) screen.classList.add('hidden');
+          if (scene) scene.classList.remove('intro-zoom', 'zooming', 'zoom-out');
+        }, 450);
         return;
       }
 
       textEl.textContent = words[index];
 
-      // Fade in
       textEl.style.transitionDuration = `${fade_in}s`;
       textEl.style.opacity = '1';
 
-      // Tahan → fade out
       setTimeout(() => {
         textEl.style.transitionDuration = `${fade_out}s`;
         textEl.style.opacity = '0';
 
-        // Tunggu fade out selesai → kata berikutnya
         setTimeout(() => {
           index++;
           showNext();
