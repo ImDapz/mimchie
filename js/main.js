@@ -4,7 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   AudioManager.init();
-  fadeManager.init();
+  FadeManager.init();
   CandleManager.init();
   SuratManager.init();
   PiguraManager.init();

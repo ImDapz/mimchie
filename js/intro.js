@@ -6,9 +6,6 @@ const IntroManager = (() => {
 
   // ✏️ EDIT KATA DI SINI
   const words = [
-    "hiiiiii yumkii",
-    "ini itu cuman test",
-    "plis jangan main free fire",
   ];
 
   // ⏱️ DURASI (detik)

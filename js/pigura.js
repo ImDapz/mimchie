@@ -2,9 +2,9 @@ const PiguraManager = (() => {
   let isOpen = false;
 
 const originMap = {
-  '1': '80% 2.5%',   // lebih kanan, lebih atas
-  '2': '15% 8%',
-  '3': '20% 35%',
+  '1': '92.5% -15%',   // lebih kanan, lebih atas
+  '2': '-7.5% -30%',
+  '3': '-2.5% 0%',
 };
 
   function init() {

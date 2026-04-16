@@ -5,22 +5,39 @@ const AudioManager = (() => {
   const MUSIC_START_TIME = 60+60+60+5;
 
   const VOLUME_KEYFRAMES = [
-    { time: 0,   volume: 0.3 },
-    { time: 15,  volume: 1 },
+    { time: MUSIC_START_TIME-20,   volume: 0.0 },
+    { time: MUSIC_START_TIME-15,  volume: 0.4},
+    { time: MUSIC_START_TIME-10,  volume: 0.5},
+    { time: MUSIC_START_TIME-0.5,  volume: 0.5}, 
+    { time: MUSIC_START_TIME,  volume: 1 },
   ];
 
+  let volumeLocked = false;
+  let lockedVolume = 1;
+  
   function getVolumeAt(time) {
+    if (volumeLocked) return lockedVolume;
+  
+    if (time <= VOLUME_KEYFRAMES[0].time) {
+      return VOLUME_KEYFRAMES[0].volume;
+    }
+  
     for (let i = 0; i < VOLUME_KEYFRAMES.length - 1; i++) {
       const a = VOLUME_KEYFRAMES[i];
       const b = VOLUME_KEYFRAMES[i + 1];
+  
       if (time >= a.time && time <= b.time) {
         const t = (time - a.time) / (b.time - a.time);
         return a.volume + (b.volume - a.volume) * t;
       }
     }
-    return VOLUME_KEYFRAMES[VOLUME_KEYFRAMES.length - 1].volume;
+  
+    // selesai fade → lock
+    volumeLocked = true;
+    lockedVolume = VOLUME_KEYFRAMES[VOLUME_KEYFRAMES.length - 1].volume;
+  
+    return lockedVolume;
   }
-
 	function init() {
 	  sfx.kertas = document.getElementById('sfxKertas');
 	  sfx.angin  = document.getElementById('sfxAngin');
@@ -28,7 +45,7 @@ const AudioManager = (() => {
 	  bgMusic    = document.getElementById('bgMusic');
 
 	  if (bgMusic) {
-	    bgMusic.volume = 0.3;
+	    bgMusic.volume = 0.0;
 	    bgMusic.addEventListener('timeupdate', () => {
 	      bgMusic.volume = getVolumeAt(bgMusic.currentTime);
 	    });
