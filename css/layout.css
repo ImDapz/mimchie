@@ -167,7 +167,7 @@
    * bottom: makin besar = makin naik
    * Ubah angka ini buat naik/turun
    */
-  bottom: -500%;
+  bottom: -540%;
 
   transform: translateX(-50%) translateZ(20px);
 
@@ -175,9 +175,9 @@
    * UKURAN KUE
    * width: makin besar = kue makin gede
    */
-  width: 40%;
-
-  z-index: 9;
+  width: 15%;
+  max-width:400px;
+  z-index: 3;
 }
 
 /* =============================================
@@ -190,6 +190,7 @@
   left: 50%;    /* tengah kue — ubah ini sesuai posisi lilin di gambar */
   transform: translateX(-50%);
   width: 10%;   /* lebar area api — ubah kalau glow kepotong */
+  max-width: 0px;
   z-index: 5;
 }
 
