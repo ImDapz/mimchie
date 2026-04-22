@@ -149,15 +149,31 @@
   transform: translateZ(12px);
 }
 
-/* Cake area — center */
-.cake-area {
+/* Grup cake + candle */
+.cake-group {
   position: absolute;
   left: 50%;
   bottom: 18%;
   transform: translateX(-50%) translateZ(20px);
   width: 40%;
   z-index: 9;
+}
+
+/* Cake area sekarang relatif dalam grup */
+.cake-area {
+  position: relative;
+  width: 100%;
   cursor: pointer;
+}
+
+/* Candle bebas diposisikan di atas cake */
+.main-candle {
+  position: absolute;
+  top: -18%;   /* ← geser ini untuk naik/turun */
+  left: 20%;   /* ← geser ini untuk kiri/kanan */
+  transform: translateX(-50%);
+  width: 8%;   /* ← ubah ini untuk ukuran */
+  z-index: 5;
 }
 
 /* Surat — right side, leaning against vas besar */
