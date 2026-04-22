@@ -149,31 +149,61 @@
   transform: translateZ(12px);
 }
 
-/* Grup cake + candle */
+/* =============================================
+   CAKE GROUP — geser ini buat mindahin kue+api sekaligus
+   ============================================= */
 .cake-group {
   position: absolute;
+
+  /* 
+   * POSISI HORIZONTAL GRUP (kue+api)
+   * left: 50% + translateX(-50%) = tengah layar
+   * Ubah left: 40% buat geser kiri, 60% buat geser kanan
+   */
   left: 50%;
-  bottom: 18%;
+
+  /*
+   * POSISI VERTIKAL GRUP
+   * bottom: makin besar = makin naik
+   * Ubah angka ini buat naik/turun
+   */
+  bottom: -500%;
+
   transform: translateX(-50%) translateZ(20px);
+
+  /*
+   * UKURAN KUE
+   * width: makin besar = kue makin gede
+   */
   width: 40%;
+
   z-index: 9;
 }
 
-/* Cake area sekarang relatif dalam grup */
+/* =============================================
+   MAIN CANDLE (API) — geser ini buat mindahin api doang
+   Posisi relatif terhadap kue.png
+   ============================================= */
+.main-candle {
+  position: absolute;
+  top: -10%;    /* naik di atas kue — ubah ini */
+  left: 50%;    /* tengah kue — ubah ini sesuai posisi lilin di gambar */
+  transform: translateX(-50%);
+  width: 10%;   /* lebar area api — ubah kalau glow kepotong */
+  z-index: 5;
+}
+
+/* =============================================
+   CAKE AREA — biasanya tidak perlu diubah
+   ============================================= */
 .cake-area {
   position: relative;
   width: 100%;
   cursor: pointer;
 }
 
-/* Candle bebas diposisikan di atas cake */
-.main-candle {
-  position: absolute;
-  top: -18%;   /* ← geser ini untuk naik/turun */
-  left: 20%;   /* ← geser ini untuk kiri/kanan */
-  transform: translateX(-50%);
-  width: 8%;   /* ← ubah ini untuk ukuran */
-  z-index: 5;
+.cake-wrapper {
+  transition: transform 0.3s var(--ease-smooth);
 }
 
 /* Surat — right side, leaning against vas besar */

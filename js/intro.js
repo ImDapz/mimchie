@@ -6,9 +6,9 @@ const IntroManager = (() => {
 
   // ✏️ EDIT KATA DI SINI
   const words = [
-  "yang ditunggu tunggu sampe michi luoa ini",
-  "ini my surprais gw ayas from atemin daoa",
-  "sowyyy yaw telat"
+  "aku engga tahu apa yang terjadi",
+  "but i can't see my friend having such a horrible dei",
+  "btw heres my project, i could making 4 u ofc"
   ];
 
   // ⏱️ DURASI (detik)
