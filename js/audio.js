@@ -3,8 +3,8 @@ const AudioManager = (() => {
   let bgMusic = null;
   let audioUnlocked = false;
   /*const MUSIC_START_TIME = 60+60+10;*/
-  /*const MUSIC_START_TIME = 60+60+60+5; aseli*/
-  const MUSIC_START_TIME = 60+19;
+  const MUSIC_START_TIME = 60+60+60+5;
+  /*const MUSIC_START_TIME = 60+19;*/
 
   const VOLUME_KEYFRAMES = [
     { time: MUSIC_START_TIME-20,   volume: 0.0 },

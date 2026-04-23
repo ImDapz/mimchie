@@ -1,11 +1,14 @@
 const PiguraManager = (() => {
   let isOpen = false;
 
-const originMap = {
-  '1': '92.5% -15%',   // lebih kanan, lebih atas
-  '2': '-7.5% -30%',
-  '3': '-2.5% 0%',
-};
+  const originMap = {
+    '1': '92.5% -15%',
+    '2': '-7.5% -30%',
+    '3': '-2.5% 0%',
+    '4': '-2.5% 45%',   // ← kamu adjust sendiri
+    '5': '95.5% 40%',   // ← kamu adjust sendiri
+    '6': '-7.5% 80%',   // ← kamu adjust sendiri
+  };
 
   function init() {
     document.querySelectorAll('.pigura').forEach(el => {
@@ -17,7 +20,6 @@ const originMap = {
       });
     });
 
-    // Tap mana saja (bukan pigura) untuk close
     document.addEventListener('click', (e) => {
       if (isOpen && !e.target.closest('.pigura')) close();
     });

@@ -115,6 +115,36 @@
   z-index: 3;
 }
 
+/* Pigura 4 — middle right, 3:4 */
+.pigura-4 {
+  position: absolute;
+  top: 64%;
+  left: 12%;
+  width: 22%;
+  max-width: 200px;
+  z-index: 3;
+}
+ 
+/* Pigura 5 — middle right, 3:4 */
+.pigura-5 {
+  position: absolute;
+  top: 50%;
+  left: 49%;
+  width: 49%;
+  max-width: 400px;
+  z-index: 3;
+}
+ 
+/* Pigura 6 — middle right, 3:4 */
+.pigura-6 {
+  position: absolute;
+  top: 90%;
+  left: 0%;
+  width: 39%;
+  z-index: 3;
+}
+
+
 /* =============================================
    TABLE-TOP ELEMENT POSITIONS (from mockup)
    ============================================= */
