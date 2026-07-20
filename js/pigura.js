@@ -2,12 +2,12 @@ const PiguraManager = (() => {
   let isOpen = false;
 
   const originMap = {
-    '1': '92.5% -15%',
-    '2': '-7.5% -30%',
-    '3': '-2.5% 0%',
-    '4': '-2.5% 45%',   // ← kamu adjust sendiri
+    '1': '92.5% 0%',
+    '2': '0% 0%',
+    '3': '0% 0%',
+    '4': '0% 45%',   // ← kamu adjust sendiri
     '5': '95.5% 40%',   // ← kamu adjust sendiri
-    '6': '-7.5% 80%',   // ← kamu adjust sendiri
+    '6': '0% 80%',   // ← kamu adjust sendiri
   };
 
   function init() {

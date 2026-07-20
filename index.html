@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="css/elements.css">
   <link rel="stylesheet" href="css/candle.css">
   <link rel="stylesheet" href="css/interactions.css">
-  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/interactions.css">
+  <link rel="stylesheet" href="css/telephone.css">   <!-- baris baru -->
+  <link rel="stylesheet" href="css/animations.css">	
 </head>
 <body>
 
@@ -33,7 +35,9 @@
     <div class="scene-bg">
       <img src="/background.png" alt="" class="scene-bg-img">
     </div>
-
+	<div class="darkness-overlay"></div>      
+	<div class="lamp-glow-layer"></div>      
+	<div class="candle-ambient-glow" id="candleAmbientGlow"></div>
     <!-- === BACKGROUND WALL AREA (pigura zone) === -->
     <div class="wall-area">
 
@@ -89,7 +93,10 @@
 
     <!-- === TABLE AREA (foreground) === -->
     <div class="table-area">
-
+    
+	  <div class="telephone" id="telephone">
+	    <img src="/telephone.webp" alt="Telephone" class="telephone-img">
+	  </div>
       <!-- Decorative candle — left side, always on -->
       <div class="deco-candle" id="decoCandle">
         <div class="deco-candle-body">
@@ -153,10 +160,21 @@
   <div class="surat-overlay" id="suratOverlay">
     <div class="surat-overlay-bg"></div>
     <div class="surat-focus" id="suratFocus">
-      <img src="/isiSurat.png" alt="Isi Surat" class="surat-focus-img">
+      <img src="/isiSurat.webp" alt="Isi Surat" class="surat-focus-img">
     </div>
   </div>
-
+  
+  <div class="telephone-overlay" id="telephoneOverlay">
+    <div class="telephone-overlay-bg"></div>
+    <div class="telephone-hand-wrap">
+      <img src="/telehand.png" alt="" class="telephone-hand-img">
+    </div>
+    <div class="telephone-subtitle-box">
+      <span id="telephoneSubtitle"></span>
+    </div>
+    <div id="telephoneTapHint" class="telephone-tap-hint">tap anywhere to close</div>
+  </div>
+  
   <!-- PIGURA FOCUS OVERLAY (no blur) -->
   <div class="pigura-overlay" id="piguraOverlay">
     <div class="pigura-focus" id="piguraFocus">
@@ -168,6 +186,10 @@
   </div>
 
   <!-- AUDIO -->
+  <audio id="sfxRinging" src="/music/ringing.mp3" preload="auto"></audio>
+  <audio id="sfxHangup" src="/music/hangup.mp3" preload="auto"></audio>
+  <audio id="sfxHangup" src="/music/hangout.mp3" preload="auto"></audio>
+  <audio id="sfxVoice" preload="auto"></audio>
   <audio id="sfxKertas" src="/music/membalikkoran.mp3" preload="auto"></audio>
   <audio id="sfxAngin" src="/music/TransisiAngin.mp3" preload="auto"></audio>
   <audio id="sfxTiupan" src="/music/tiupan.mp3" preload="auto"></audio>
@@ -180,6 +202,7 @@
   <script src="js/surat.js"></script>
   <script src="js/pigura.js"></script>
   <script src="js/intro.js"></script>
+  <script src="js/telephone.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

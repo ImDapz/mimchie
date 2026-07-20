@@ -29,7 +29,29 @@
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-depth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+
+  /* ===== LIGHTING SYSTEM ===== */
+  /* Semua nilai di bawah ini titik adjust cahaya kamu.
+     Ubah di sini saja — tidak perlu ubah di file lain. */
+
+  /* Kegelapan dasar ruangan (konstan, terpisah dari lilin & lampu) */
+  /* Kegelapan dasar ruangan */
+    /* GELAP RUANGAN */  
+
+    --room-darkness: 0.5;   
+    /* CAHAYA LAMPU (dari atas) */  
+    --lamp-color: rgba(255, 190, 120, 0.6);  
+    --lamp-position: 50% -10%;  
+    --lamp-size: 180% 120%;  
+    --lamp-blur: 0px;  --lamp-intensity: 1;   
+    /* CAHAYA AMBIENT LILIN (dari area kue) */ 
+    --candle-ambient-color: rgba(255, 170, 50, 0.35);  
+    --candle-ambient-position: 50% 82%;  
+    --candle-ambient-size: 45% 45%;  
+    --candle-ambient-blur: 45px;  
+    --candle-ambient-intensity: 1;
+  }
+
 
 html, body {
   width: 100%;
@@ -41,8 +63,7 @@ html, body {
 }
 
 body {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-y: hidden; /* halaman tidak boleh scroll — scene selalu 1 layar penuh */
 }
 
 img {
@@ -70,27 +91,48 @@ img {
 }
 
 /* =============================================
-   GLOBAL WARM GLOW LAYER
+   LIGHTING LAYERS
+   Semua layer ini anak dari .scene (lihat index.html),
+   jadi ikut zoom bersama scene — tapi masing-masing independen
+   satu sama lain (gelap ruangan, lampu, ambient lilin).
+   Posisi pakai bleed (bukan inset:0) supaya tidak bolong saat scene
+   di-scale dari titik origin manapun.
    ============================================= */
-.warm-glow-layer {
-  position: fixed;
+.darkness-overlay {
+  position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 6;
+  background: #000;
+  opacity: var(--room-darkness);
   pointer-events: none;
-  background: radial-gradient(
-    ellipse 60% 40% at 50% 75%,
-    var(--warm-orange),
-    transparent 70%
-  );
-  opacity: 1;
-  transition: opacity 1s var(--ease-smooth);
+}
+
+.lamp-glow-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  background: radial-gradient(ellipse var(--lamp-size) at var(--lamp-position), var(--lamp-color), transparent 70%);
+  filter: blur(var(--lamp-blur));
+  opacity: var(--lamp-intensity);
   mix-blend-mode: screen;
 }
 
-.warm-glow-layer.extinguished {
-  opacity: 0;
+.candle-ambient-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  background: radial-gradient(ellipse var(--candle-ambient-size) at var(--candle-ambient-position), var(--candle-ambient-color), transparent 70%);
+  filter: blur(var(--candle-ambient-blur));
+  opacity: var(--candle-ambient-intensity);
+  mix-blend-mode: screen;
+  transition: opacity 1.2s var(--ease-smooth);
 }
 
+.candle-ambient-glow.extinguished {
+  opacity: 0;
+}
 
 /* =============================================
    INTRO SCREEN — black with centered text

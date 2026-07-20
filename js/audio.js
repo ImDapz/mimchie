@@ -2,21 +2,23 @@ const AudioManager = (() => {
   const sfx = {};
   let bgMusic = null;
   let audioUnlocked = false;
+  let duckFactor = 1.0; // 1 = normal, 0.3 = 30% volume
+  let duckTween = null;
   /*const MUSIC_START_TIME = 60+60+10;*/
-  const MUSIC_START_TIME = 60+60+60+5;
+  const MUSIC_START_TIME = 51.8;
   /*const MUSIC_START_TIME = 60+19;*/
 
   const VOLUME_KEYFRAMES = [
     { time: MUSIC_START_TIME-20,   volume: 0.0 },
-    { time: MUSIC_START_TIME-15,  volume: 0.4},
-    { time: MUSIC_START_TIME-10,  volume: 0.5},
-    { time: MUSIC_START_TIME-0.5,  volume: 0.5}, 
+    { time: MUSIC_START_TIME-15,  volume: 0.15},
+    { time: MUSIC_START_TIME-10,  volume: 0.3},
+    { time: MUSIC_START_TIME-0.5,  volume: 0.3}, 
     /*{ time: MUSIC_START_TIME+2,  volume: 1 },*/
-    { time: MUSIC_START_TIME,  volume: 1 },
+    { time: MUSIC_START_TIME,  volume: 0.6 },
   ];
 
   let volumeLocked = false;
-  let lockedVolume = 1;
+  let lockedVolume = 0.6;
   
   function getVolumeAt(time) {
     if (volumeLocked) return lockedVolume;
@@ -48,9 +50,8 @@ const AudioManager = (() => {
 	  bgMusic    = document.getElementById('bgMusic');
 
 	  if (bgMusic) {
-	    bgMusic.volume = 0.0;
 	    bgMusic.addEventListener('timeupdate', () => {
-	      bgMusic.volume = getVolumeAt(bgMusic.currentTime);
+	      bgMusic.volume = getVolumeAt(bgMusic.currentTime) * duckFactor;
 	    });
 	  }
 
@@ -84,6 +85,39 @@ const AudioManager = (() => {
       bgMusic.play().catch(() => {});
     }
   }
+  function tweenDuck(target, duration = 400) {
+    if (duckTween) cancelAnimationFrame(duckTween);
+  
+    const start = performance.now();
+    const from = duckFactor;
+  
+    function update(now) {
+      const t = Math.min((now - start) / duration, 1);
+  
+      // easeOutCubic
+      const ease = 0.5 - Math.cos(Math.PI * t) / 2;
+  
+      duckFactor = from + (target - from) * ease;
+  
+      if (t < 1) {
+        duckTween = requestAnimationFrame(update);
+      }
+    }
+  
+    duckTween = requestAnimationFrame(update);
+  }
 
-  return { init, play, startWithOffset };
+  return {
+    init,
+    play,
+    startWithOffset,
+  
+    duck() {
+      tweenDuck(0.4, 500);
+    },
+  
+    unduck() {
+      tweenDuck(1.0, 700);
+    }
+  };
 })();

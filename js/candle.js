@@ -1,8 +1,7 @@
 /* =============================================
    candle.js — Main candle interaction
    - Tap cake area → blow out candle
-   - Flame disappears, glow fades, scene darkens
-   - Smoke wisp appears
+   - Flame disappears, ambient glow fades, smoke wisp appears
    ============================================= */
 
 const CandleManager = (() => {
@@ -23,33 +22,26 @@ const CandleManager = (() => {
     if (!isLit) return;
     isLit = false;
 
-    // Play blow sound
     AudioManager.play('tiupan');
 
-    // Flame out
     const flameWrap = document.getElementById('mainFlameWrap');
     const glow = document.getElementById('mainCandleGlow');
-    const glowLayer = document.getElementById('warm-glow-layer');
-    const scene = document.getElementById('scene');
+    const ambientGlow = document.getElementById('candleAmbientGlow');
 
     if (flameWrap) flameWrap.classList.add('out');
     if (glow) glow.classList.add('out');
+    if (ambientGlow) ambientGlow.classList.add('extinguished');
 
-    // Global warm glow fades (but deco candle glow stays via its own element)
-    if (glowLayer) glowLayer.classList.add('extinguished');
+    // TIDAK ADA lagi scene.classList.add('candle-out') di sini.
+    // Kegelapan ruangan sekarang konstan (--room-darkness di base.css),
+    // terpisah dari status lilin — supaya tidak bentrok dengan filter
+    // animasi zoom pigura.
 
-    // Scene slightly darker
-    if (scene) scene.classList.add('candle-out');
-
-    // Add smoke wisp
     if (flameWrap) {
       const smoke = document.createElement('div');
       smoke.className = 'smoke-wisp';
       flameWrap.parentElement.appendChild(smoke);
-
-      smoke.addEventListener('animationend', () => {
-        smoke.remove();
-      });
+      smoke.addEventListener('animationend', () => smoke.remove());
     }
   }
 

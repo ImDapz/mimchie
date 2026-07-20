@@ -1,0 +1,164 @@
+/* =============================================
+   telephone.css — Telephone visual & interaction states
+   ============================================= */
+
+:root {
+  /* Posisi & ukuran telepon — adjust sesuai kebutuhan kamu */
+  --telephone-left: 25%;
+  --telephone-bottom: -650%;
+  --telephone-width: 18%;
+
+  /* Overlay saat telepon diangkat */
+  --telephone-overlay-darkness: 0.7;
+  --telephone-overlay-blur: 6px;
+
+  /* Ukuran & posisi telehand.png di overlay */
+  --telehand-width: 55%;
+  --telehand-max-width: 320px;
+
+  /* Subtitle */
+  --subtitle-font-size: 18px;
+  --subtitle-bg: rgba(0, 0, 0, 0.75);
+  --subtitle-color: #fff;
+  --subtitle-bottom: 12%;
+}
+
+/* =============================================
+   TELEPHONE — elemen di atas meja
+   ============================================= */
+.telephone {
+  position: absolute;
+  left: var(--telephone-left);
+  bottom: var(--telephone-bottom);
+  width: var(--telephone-width);
+  z-index: 9;
+  cursor: pointer;
+  transform: translateZ(18px);
+  transition: transform 0.2s var(--ease-smooth);
+}
+
+.telephone:active {
+  transform: translateZ(18px) scale(0.95);
+}
+
+.telephone-img {
+  width: 100%;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+  pointer-events: none;
+}
+
+/* Animasi bergetar saat berdering */
+.telephone.ringing .telephone-img {
+  animation: telephone-shake 0.35s ease-in-out infinite;
+}
+
+@keyframes telephone-shake {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-4deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* =============================================
+   TELEPHONE OVERLAY — saat telepon diangkat
+   ============================================= */
+.telephone-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200; /* di atas surat-overlay & pigura-overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-smooth);
+}
+
+.telephone-overlay.active {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.telephone-overlay-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--telephone-overlay-darkness));
+  backdrop-filter: blur(var(--telephone-overlay-blur));
+  -webkit-backdrop-filter: blur(var(--telephone-overlay-blur));
+}
+
+.telephone-hand-wrap {
+  position: relative;
+  z-index: 2;
+  width: var(--telehand-width);
+  max-width: var(--telehand-max-width);
+  transform: scale(0.9) translateY(15px);
+  transition: transform 0.5s var(--ease-bounce);
+}
+
+.telephone-overlay.active .telephone-hand-wrap {
+  transform: scale(1) translateY(0);
+}
+
+.telephone-hand-img {
+  width: 100%;
+  display: block;
+  filter: drop-shadow(0 15px 35px rgba(0,0,0,0.7));
+  pointer-events: none;
+}
+
+/* =============================================
+   SUBTITLE — font umum, kotak hitam
+   ============================================= */
+.telephone-subtitle-box {
+  position: absolute;
+  left: 50%;
+  bottom: var(--subtitle-bottom);
+  transform: translateX(-50%);
+  z-index: 3;
+
+  max-width: 85%;
+
+  pointer-events: none;
+}
+
+#telephoneSubtitle{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+}
+
+.subtitle-line {
+    display: inline-block;
+
+    padding: 6px 8px;
+
+    background: rgba(10,10,10,.55);
+    border-radius: 4px;
+
+    color: white;
+
+    width: fit-content;
+    max-width: 85vw;
+
+    white-space: pre-wrap;
+    text-align: center;
+}
+/* Hint "tap anywhere to close" — hanya tampil setelah voice selesai */
+.telephone-tap-hint {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1.5px;
+  pointer-events: none;
+  display: none; /* dikontrol via JS */
+  animation: hint-pulse 2s ease-in-out infinite;
+}

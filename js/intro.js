@@ -6,6 +6,9 @@ const IntroManager = (() => {
 
   // ✏️ EDIT KATA DI SINI
   const words = [
+  "yumkiiii",
+  "kamuu ultahhh",
+  "yeyyyyy"
   ];
 
   // ⏱️ DURASI (detik)
@@ -35,6 +38,11 @@ const IntroManager = (() => {
 
       if (typeof AudioManager !== 'undefined') {
         AudioManager.startWithOffset(totalDuration / 1000);
+      }
+
+      // Jadwalkan dering pertama telepon, dihitung dari titik ini
+      if (typeof TelephoneManager !== 'undefined') {
+        TelephoneManager.scheduleFirstRing();
       }
 
       screen.removeEventListener('click', startHandler);

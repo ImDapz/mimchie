@@ -1,3 +1,4 @@
+
 /* =============================================
    main.js — Bootstrap all modules
    ============================================= */
@@ -8,5 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   CandleManager.init();
   SuratManager.init();
   PiguraManager.init();
-  IntroManager.init(); // ← tambah ini
-});
+  TelephoneManager.init(); // ← baru
+  IntroManager.init();
+});	

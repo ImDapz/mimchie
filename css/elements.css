@@ -21,7 +21,6 @@
   width: 100%;
   border-radius: 4px;
   overflow: hidden;
-  /* Fake 3D frame depth */
   box-shadow:
     0 4px 12px rgba(0,0,0,0.6),
     0 8px 25px rgba(0,0,0,0.4),
@@ -35,7 +34,6 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  /* Inner bevel illusion */
   box-shadow:
     inset 2px 2px 8px rgba(0,0,0,0.5),
     inset -2px -2px 8px rgba(0,0,0,0.3),
@@ -92,7 +90,6 @@
   filter: drop-shadow(0 6px 18px rgba(0,0,0,0.65));
 }
 
-
 /* =============================================
    TABLE — Surface perspective feel
    ============================================= */
@@ -115,6 +112,9 @@
 
 /* =============================================
    SURAT OVERLAY (focus mode)
+   INI YANG HILANG — tanpa ini, klik surat "kosong" (event jalan
+   tapi overlay-nya tidak pernah tampil karena tidak punya
+   position:fixed / opacity transition / state .active).
    ============================================= */
 .surat-overlay {
   position: fixed;
@@ -172,7 +172,7 @@
   justify-content: center;
   pointer-events: none;
   opacity: 0;
-   perspective for camera-move-forward effect 
+  /* perspective for camera-move-forward effect */
   perspective: 800px;
 }
 
@@ -186,10 +186,6 @@
   z-index: 2;
   width: 80%;
   max-width: 360px;
-}
-/*
-.pigura-overlay.active .pigura-focus {
-  /* hapus ini, biarkan animasi CSS yang handle 
 }
 
 .pigura-focus-frame {
@@ -217,4 +213,4 @@
 .pigura-focus-img {
   width: 100%;
   display: block;
-}*/
+}
