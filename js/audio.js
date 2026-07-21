@@ -113,7 +113,7 @@ const AudioManager = (() => {
     startWithOffset,
   
     duck() {
-      tweenDuck(0.4, 500);
+      tweenDuck(0.3, 500);
     },
   
     unduck() {

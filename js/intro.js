@@ -27,6 +27,24 @@ const IntroManager = (() => {
     const scene = document.getElementById('scene');
     if (scene) scene.classList.add('intro-zoom');
 
+    const hint = document.getElementById('intro-tap-hint');
+    if (hint) {
+      hint.textContent = 'memuat...';
+      hint.classList.add('loading');
+    }
+
+    // Tap listener BARU dipasang setelah aset kritis (bgMusic) siap.
+    // Sebelum itu, tap di layar tidak melakukan apa-apa sama sekali.
+    LoaderManager.init(() => {
+      if (hint) {
+        hint.textContent = 'tap anywhere';
+        hint.classList.remove('loading');
+      }
+      attachStartHandler(screen);
+    });
+  }
+
+  function attachStartHandler(screen) {
     const startHandler = () => {
       if (started) return;
       started = true;

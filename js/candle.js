@@ -2,6 +2,7 @@
    candle.js — Main candle interaction
    - Tap cake area → blow out candle
    - Flame disappears, ambient glow fades, smoke wisp appears
+   - Lampu ruangan mulai nyala (fade in) setelah lilin ditiup
    ============================================= */
 
 const CandleManager = (() => {
@@ -27,15 +28,15 @@ const CandleManager = (() => {
     const flameWrap = document.getElementById('mainFlameWrap');
     const glow = document.getElementById('mainCandleGlow');
     const ambientGlow = document.getElementById('candleAmbientGlow');
+    const lampLayer = document.getElementById('lampGlowLayer');
 
     if (flameWrap) flameWrap.classList.add('out');
     if (glow) glow.classList.add('out');
     if (ambientGlow) ambientGlow.classList.add('extinguished');
 
-    // TIDAK ADA lagi scene.classList.add('candle-out') di sini.
-    // Kegelapan ruangan sekarang konstan (--room-darkness di base.css),
-    // terpisah dari status lilin — supaya tidak bentrok dengan filter
-    // animasi zoom pigura.
+    // Lampu nyala (fade in) baru SEKARANG, setelah lilin mati —
+    // sebelumnya lampu mati total, jadi mata user fokus ke kue dulu.
+    if (lampLayer) lampLayer.classList.add('lit');
 
     if (flameWrap) {
       const smoke = document.createElement('div');

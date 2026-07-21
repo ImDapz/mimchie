@@ -184,9 +184,9 @@
 .vas-kecil {
   position: absolute;
   left: 14%;
-  bottom: 24%;
+  bottom: -80px;
   width: 16%;
-  z-index: 8;
+  z-index: 7;
   transform: translateZ(18px);
 }
 

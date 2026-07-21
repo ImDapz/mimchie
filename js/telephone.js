@@ -7,11 +7,12 @@ const TelephoneManager = (() => {
   /* ============ HARDCODE DI SINI ============ */
 
   const VOICE_LIST = [
-    'luna.ogg'
+    'luna.ogg',
+    'mimci.mp3'
   ];
 
-  const JEDA_AWAL = 132;
-  const JEDA_ANTAR_VOICE = 5;
+  const JEDA_AWAL = 32;
+  const JEDA_ANTAR_VOICE = 12;
 
   /* ============================================ */
 
@@ -29,7 +30,6 @@ const TelephoneManager = (() => {
   function init() {
     ringingAudio = document.getElementById('sfxRinging');
     hangupAudio  = document.getElementById('sfxHangup');
-    hangoutAudio  = document.getElementById('sfxHangout');
     voiceAudio   = document.getElementById('sfxVoice');
 
     const phoneEl = document.getElementById('telephone');
@@ -160,13 +160,6 @@ const TelephoneManager = (() => {
     hangupAudio.play().catch(() => {});
     hangupAudio.addEventListener('ended', callback, { once: true });
   }
-  function playHangoutThen(callback) {
-    if (!hangupAudio) { callback(); return; }
-    hangoutAudio.currentTime = 0;
-    hangoutAudio.play().catch(() => {});
-    hangoutAudio.addEventListener('ended', callback, { once: true });
-  }
-
   function openOverlay() {
     const overlay = document.getElementById('telephoneOverlay');
     if (overlay) overlay.classList.add('active');
@@ -212,7 +205,7 @@ const TelephoneManager = (() => {
 
     phoneState = 'idle';
 
-    playHangoutThen(() => {
+    playHangupThen(() => {
       closeOverlay();
       voiceIndex++;
 

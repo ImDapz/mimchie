@@ -36,7 +36,7 @@
       <img src="/background.png" alt="" class="scene-bg-img">
     </div>
 	<div class="darkness-overlay"></div>      
-	<div class="lamp-glow-layer"></div>      
+	<div class="lamp-glow-layer" id="lampGlowLayer"></div>       
 	<div class="candle-ambient-glow" id="candleAmbientGlow"></div>
     <!-- === BACKGROUND WALL AREA (pigura zone) === -->
     <div class="wall-area">
@@ -113,7 +113,6 @@
       <div class="vas-kecil" id="vasKecil">
         <img src="/vasKecil.png" alt="Vas Kecil" class="vas-kecil-img">
       </div>
-
       <!-- Vas menengah + bunga — right-center above cake -->
       <div class="vas-menengah" id="vasMenengah">
         <img src="/vasMenengah.png" alt="Vas Menengah" class="vas-menengah-img">
@@ -143,9 +142,9 @@
       </div>
 
       <!-- Vas bunga besar — right side -->
-      <div class="vas-besar" id="vasBesar">
+      <!--<div class="vas-besar" id="vasBesar">
         <img src="/vasBesar.png" alt="Vas Bunga Besar" class="vas-besar-img">
-      </div>
+      </div>-->
 
       <!-- Table element -->
       <div class="table-element" id="tableElement">
@@ -188,7 +187,6 @@
   <!-- AUDIO -->
   <audio id="sfxRinging" src="/music/ringing.mp3" preload="auto"></audio>
   <audio id="sfxHangup" src="/music/hangup.mp3" preload="auto"></audio>
-  <audio id="sfxHangup" src="/music/hangout.mp3" preload="auto"></audio>
   <audio id="sfxVoice" preload="auto"></audio>
   <audio id="sfxKertas" src="/music/membalikkoran.mp3" preload="auto"></audio>
   <audio id="sfxAngin" src="/music/TransisiAngin.mp3" preload="auto"></audio>
@@ -201,6 +199,7 @@
   <script src="js/candle.js"></script>
   <script src="js/surat.js"></script>
   <script src="js/pigura.js"></script>
+  <script src="js/loader.js"></script>
   <script src="js/intro.js"></script>
   <script src="js/telephone.js"></script>
   <script src="js/main.js"></script>

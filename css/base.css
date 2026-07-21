@@ -50,6 +50,8 @@
     --candle-ambient-size: 45% 45%;  
     --candle-ambient-blur: 45px;  
     --candle-ambient-intensity: 1;
+
+    --lamp-transition-duration: 1.8s;
   }
 
 
@@ -114,8 +116,13 @@ img {
   pointer-events: none;
   background: radial-gradient(ellipse var(--lamp-size) at var(--lamp-position), var(--lamp-color), transparent 70%);
   filter: blur(var(--lamp-blur));
-  opacity: var(--lamp-intensity);
+  opacity: 0; /* mati di awal — biar fokus mata ke lilin dulu */
   mix-blend-mode: screen;
+  transition: opacity var(--lamp-transition-duration) var(--ease-smooth);
+}
+ 
+.lamp-glow-layer.lit {
+  opacity: var(--lamp-intensity);
 }
 
 .candle-ambient-glow {
@@ -161,6 +168,14 @@ img {
   color: rgba(255,255,255,0.4);
   letter-spacing: 2px;
   animation: hint-pulse 2s ease-in-out infinite;
+}
+
+/* Tambahkan ke base.css, di bawah rule #intro-tap-hint yang sudah ada */
+
+#intro-tap-hint.loading {
+  animation: none;
+  opacity: 0.5;
+  letter-spacing: 1px;
 }
 
 @keyframes hint-pulse {

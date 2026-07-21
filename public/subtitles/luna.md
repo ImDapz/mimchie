@@ -6,4 +6,4 @@
 (0:23) Dan dikelilingi \noleh hal-hal baik 
 (0:33) Dan untuk kedepannya, \nYumki menjadi \nanak yang baik juga 
 (0:41) Yang positive \nvibes anjay 
-(0:45) Adalah segitu aja ya, \ngabisa berkata-kataku, \nastaga
+(0:45) dah lah segitu aja ya, \ngabisa berkata-kataku, \nastaga
