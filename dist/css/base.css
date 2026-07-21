@@ -1,0 +1,198 @@
+/* =============================================
+   base.css — Resets, Variables, Typography
+   ============================================= */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+:root {
+  /* Colors */
+  --bg-dark: #080808;
+  --warm-orange: rgba(255, 170, 50, 0.45);
+  --warm-soft: rgba(255, 200, 100, 0.15);
+  --candle-yellow: #FFD06B;
+  --candle-orange: #FF9E2C;
+  --candle-white: #FFF8E7;
+
+  /* Depth / 3D */
+  --perspective-scene: 1000px;
+  --table-rotateX: 8deg;
+
+  /* Timing */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-depth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* ===== LIGHTING SYSTEM ===== */
+  /* Semua nilai di bawah ini titik adjust cahaya kamu.
+     Ubah di sini saja — tidak perlu ubah di file lain. */
+
+  /* Kegelapan dasar ruangan (konstan, terpisah dari lilin & lampu) */
+  /* Kegelapan dasar ruangan */
+    /* GELAP RUANGAN */  
+
+    --room-darkness: 0.5;   
+    /* CAHAYA LAMPU (dari atas) */  
+    --lamp-color: rgba(255, 190, 120, 0.6);  
+    --lamp-position: 50% -10%;  
+    --lamp-size: 180% 120%;  
+    --lamp-blur: 0px;  --lamp-intensity: 1;   
+    /* CAHAYA AMBIENT LILIN (dari area kue) */ 
+    --candle-ambient-color: rgba(255, 170, 50, 0.35);  
+    --candle-ambient-position: 50% 82%;  
+    --candle-ambient-size: 45% 45%;  
+    --candle-ambient-blur: 45px;  
+    --candle-ambient-intensity: 1;
+
+    --lamp-transition-duration: 1.8s;
+  }
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: var(--bg-dark);
+  font-family: 'Lora', serif;
+  color: #fff;
+}
+
+body {
+  overflow-y: hidden; /* halaman tidak boleh scroll — scene selalu 1 layar penuh */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* =============================================
+   FADE OVERLAY (black → transparent on load)
+   ============================================= */
+.fade-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 1.8s var(--ease-smooth);
+}
+
+.fade-overlay.faded {
+  opacity: 0;
+}
+
+/* =============================================
+   LIGHTING LAYERS
+   Semua layer ini anak dari .scene (lihat index.html),
+   jadi ikut zoom bersama scene — tapi masing-masing independen
+   satu sama lain (gelap ruangan, lampu, ambient lilin).
+   Posisi pakai bleed (bukan inset:0) supaya tidak bolong saat scene
+   di-scale dari titik origin manapun.
+   ============================================= */
+.darkness-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  background: #000;
+  opacity: var(--room-darkness);
+  pointer-events: none;
+}
+
+.lamp-glow-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  background: radial-gradient(ellipse var(--lamp-size) at var(--lamp-position), var(--lamp-color), transparent 70%);
+  filter: blur(var(--lamp-blur));
+  opacity: 0; /* mati di awal — biar fokus mata ke lilin dulu */
+  mix-blend-mode: screen;
+  transition: opacity var(--lamp-transition-duration) var(--ease-smooth);
+}
+ 
+.lamp-glow-layer.lit {
+  opacity: var(--lamp-intensity);
+}
+
+.candle-ambient-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  background: radial-gradient(ellipse var(--candle-ambient-size) at var(--candle-ambient-position), var(--candle-ambient-color), transparent 70%);
+  filter: blur(var(--candle-ambient-blur));
+  opacity: var(--candle-ambient-intensity);
+  mix-blend-mode: screen;
+  transition: opacity 1.2s var(--ease-smooth);
+}
+
+.candle-ambient-glow.extinguished {
+  opacity: 0;
+}
+
+/* =============================================
+   INTRO SCREEN — black with centered text
+   ============================================= */
+#intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+#intro-screen.hidden {
+  display: none;
+}
+
+#intro-tap-hint {
+  position: absolute;
+  bottom: 15%;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+  animation: hint-pulse 2s ease-in-out infinite;
+}
+
+/* Tambahkan ke base.css, di bawah rule #intro-tap-hint yang sudah ada */
+
+#intro-tap-hint.loading {
+  animation: none;
+  opacity: 0.5;
+  letter-spacing: 1px;
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
+}
+
+#intro-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+  padding: 0 32px;
+  opacity: 0;
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+  letter-spacing: 1px;
+  line-height: 1.6;
+}
