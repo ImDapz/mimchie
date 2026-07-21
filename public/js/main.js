@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   CandleManager.init();
   SuratManager.init();
   PiguraManager.init();
-  TelephoneManager.init(); // ← baru
+  TelephoneManager.init();
+  DustManager.init();
   IntroManager.init();
 });	

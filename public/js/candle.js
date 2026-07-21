@@ -37,7 +37,8 @@ const CandleManager = (() => {
     // Lampu nyala (fade in) baru SEKARANG, setelah lilin mati —
     // sebelumnya lampu mati total, jadi mata user fokus ke kue dulu.
     if (lampLayer) lampLayer.classList.add('lit');
-
+    if (dustLayer) dustLayer.classList.add('lit');
+ 
     if (flameWrap) {
       const smoke = document.createElement('div');
       smoke.className = 'smoke-wisp';

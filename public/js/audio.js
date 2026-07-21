@@ -10,8 +10,8 @@ const AudioManager = (() => {
 
   const VOLUME_KEYFRAMES = [
     { time: MUSIC_START_TIME-25,   volume: 0.0 },
-    { time: MUSIC_START_TIME-17.5,  volume: 0.15},
-    { time: MUSIC_START_TIME-12.5,  volume: 0.3},
+    { time: MUSIC_START_TIME-20,  volume: 0.15},
+    { time: MUSIC_START_TIME-10,  volume: 0.3},
     { time: MUSIC_START_TIME-0.5,  volume: 0.3}, 
     /*{ time: MUSIC_START_TIME+2,  volume: 1 },*/
     { time: MUSIC_START_TIME,  volume: 0.6 },

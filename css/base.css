@@ -52,6 +52,9 @@
     --candle-ambient-intensity: 1;
 
     --lamp-transition-duration: 1.8s;
+
+    --dust-color: rgba(255, 250, 235, 0.9);
+    --dust-opacity: 0.8; /* opacity keseluruhan layer debu (bukan per partikel) */
   }
 
 
@@ -195,4 +198,41 @@ img {
   transition-timing-function: ease-in-out;
   letter-spacing: 1px;
   line-height: 1.6;
+}
+
+
+.dust-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 8; /* di atas lamp-glow-layer(7), di bawah objek meja yang perlu di depan debu kalau ada */
+  pointer-events: none;
+  opacity: 0; /* mati di awal, sinkron sama lampu */
+  transition: opacity var(--lamp-transition-duration) var(--ease-smooth);
+ 
+  -webkit-mask-image: radial-gradient(ellipse var(--lamp-size) at var(--lamp-position), black, transparent 70%);
+          mask-image: radial-gradient(ellipse var(--lamp-size) at var(--lamp-position), black, transparent 70%);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+ 
+.dust-layer.lit {
+  opacity: var(--dust-opacity);
+}
+ 
+.dust-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--dust-color);
+  will-change: transform, opacity;
+  animation-name: dust-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+ 
+@keyframes dust-float {
+  0%   { transform: translate(0, 0) scale(1);   opacity: 0; }
+  10%  {                                         opacity: 1; }
+  50%  { transform: translate(var(--drift-x), var(--drift-y)) scale(1.15); }
+  90%  {                                         opacity: 1; }
+  100% { transform: translate(0, 0) scale(1);    opacity: 0; }
 }
